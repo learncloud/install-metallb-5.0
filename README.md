@@ -42,12 +42,13 @@
     curl https://raw.githubusercontent.com/metallb/metallb/v0.9.3/manifests/namespace.yaml > METALLB_HOME/manifest/yaml/metallb_namespace.yaml
 
     #위 링크 다운로드가 불가능할 경우 아래 링크를 이용(개인 github)
-    curl -LJ -o metallb_namespace.yaml 2314241ㅁㅁㅁ?raw=true
+    curl -LJ -o metallb_namespace.yaml https://github.com/learncloud/install-metallb-5.0/blob/main/manifest/yaml/metallb_namespace.yaml?raw=true
 
     ## metallb yaml을 다운
-    $ curl https://raw.githubusercontent.com/metallb/metallb/v0.9.3/manifests/metallb.yaml >    METALLB_HOME/manifest/yaml/metallb.yaml
+    curl https://raw.githubusercontent.com/metallb/metallb/v0.9.3/manifests/metallb.yaml >    METALLB_HOME/manifest/yaml/metallb.yaml
+    
     #위 링크 다운로드가 불가능할 경우 아래 링크를 이용(개인 github)
-    curl -LJ -o metallb.yaml 2314241ㅁㅁㅁ?raw=true
+    curl -LJ -o metallb.yaml https://github.com/learncloud/install-metallb-5.0/blob/main/manifest/yaml/metallb.yaml?raw=true
 
 
     ```
@@ -57,22 +58,23 @@
     ```bash
     ## metallb yaml을 다운
     curl https://raw.githubusercontent.com/tmax-cloud/install-metallb/5.0/manifest/metallb_cidr.yaml > METALLB_HOME/manifest/yaml/metallb_cidr.yaml
+    
     #위 링크 다운로드가 불가능할 경우 아래 링크를 이용(개인 github)
-    curl -LJ -o metallb_cidr.yaml 2314241ㅁㅁㅁ?raw=true
+    curl -LJ -o metallb_cidr.yaml https://github.com/learncloud/install-metallb-5.0/blob/main/manifest/yaml/metallb_cidr.yaml?raw=true
 
 
     ```
 
 2. 위의 과정에서 생성한 tar 파일들을 폐쇄망 환경으로 이동시킨 뒤 사용하려는 registry에 이미지를 push한다.
     ```bash
-    $ sudo docker load < metallb-controller_${METALLB_VERSION}.tar
-    $ sudo docker load < metallb-speaker_${METALLB_VERSION}.tar
+    sudo docker load < metallb-controller_${METALLB_VERSION}.tar
+    sudo docker load < metallb-speaker_${METALLB_VERSION}.tar
 
-    $ sudo docker tag metallb/controller:${METALLB_VERSION} ${REGISTRY}/metallb/controller:${METALLB_VERSION}
-    $ sudo docker tag metallb/speaker:${METALLB_VERSION} ${REGISTRY}/metallb/speaker:${METALLB_VERSION}
+    sudo docker tag metallb/controller:${METALLB_VERSION} ${REGISTRY}/metallb/controller:${METALLB_VERSION}
+    sudo docker tag metallb/speaker:${METALLB_VERSION} ${REGISTRY}/metallb/speaker:${METALLB_VERSION}
 
-    $ sudo docker push ${REGISTRY}/metallb/controller:${METALLB_VERSION}
-    $ sudo docker push ${REGISTRY}/metallb/speaker:${METALLB_VERSION}
+    sudo docker push ${REGISTRY}/metallb/controller:${METALLB_VERSION}
+    sudo docker push ${REGISTRY}/metallb/speaker:${METALLB_VERSION}
     ```
 
 ## 설치 가이드
@@ -90,8 +92,8 @@
    sed -i 's/v0.9.3/'${METALLB_VERSION}'/g' metallb.yaml
 	```
 
-* 비고 :
-    * `폐쇄망에서 설치를 진행하여 별도의 image registry를 사용하는 경우 registry 정보를 추가로 설정해준다.`
+* 폐쇄망에서 설치를 진행하여 별도의 image registry를 사용하는 경우 registry 정보를 추가로 설정
+
 	```bash
    sed -i 's/metallb\/speaker/'${REGISTRY}'\/metallb\/speaker/g' metallb.yaml 
    sed -i 's/metallb\/controller/'${REGISTRY}'\/metallb\/controller/g' metallb.yaml 
