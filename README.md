@@ -28,11 +28,6 @@
     sudo docker pull metallb/speaker:${METALLB_VERSION}
     sudo docker save metallb/speaker:${METALLB_VERSION} > metallb-speaker_${METALLB_VERSION}.tar
 
-    sudo docker pull metallb/controller:${METALLB_VERSION}
-    sudo docker save metallb/controller:${METALLB_VERSION} > metallb-controller_${METALLB_VERSION}.tar
-    sudo docker pull metallb/speaker:${METALLB_VERSION}
-    sudo docker save metallb/speaker:${METALLB_VERSION} > metallb-speaker_${METALLB_VERSION}.tar
-
     ```
 
 
